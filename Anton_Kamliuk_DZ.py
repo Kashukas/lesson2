@@ -167,3 +167,5 @@ long_string1 = """
                3) 789gfhbjnkml,hbjnmkfhbjnkmfghbjn
                """
 print(long_string1)
+stribg1 = 'Total recall'
+print(string1)
