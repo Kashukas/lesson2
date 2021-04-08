@@ -167,3 +167,5 @@ long_string1 = """
                3) 789gfhbjnkml,hbjnmkfhbjnkmfghbjn
                """
 print(long_string1)
+string1 = 'Conflict'
+print(string1)
