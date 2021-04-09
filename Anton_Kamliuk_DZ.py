@@ -167,9 +167,5 @@ long_string1 = """
                3) 789gfhbjnkml,hbjnmkfhbjnkmfghbjn
                """
 print(long_string1)
-<<<<<<< HEAD
 string1 = 'Total recall'
-=======
-string1 = 'Total recall'
->>>>>>> Kashukas-patch-1
 print(string1)
