@@ -5,6 +5,7 @@ try:
     # Check if weight is more than 0.
     if weight > 0:
         height = input('Введите ваш рост в метрах (например, 1.82): ')  # Get height from user.
+        gender = input('Введите ваш пол (m/f): ')
         # Handling ValueError from height.
         try:
             height = float(height)  # Convert height to a floating point number.
@@ -18,6 +19,13 @@ try:
                     print('10' + '-'*left_scale + '|' + '-'*right_scale + '50')  # Print scale.
                 else:
                     print('Значение вашего ИМТ не попадает в шкалу от 10 до 50.')  # Message if bmi value is out of scale.
+                print('Ваш пол: ' + gender)
+                if bmi < 18.5:
+                    print('Ваш вес ниже нормального.')
+                if bmi >= 18.5 and bmi < 25:
+                    print('У вас нормальный вес.')
+                if bmi >= 25:
+                    print('У вас избыточный вес.')
             else:
                 print('Рост должен быть больше 0. Работа калькулятора завершена.')
         except ValueError:
