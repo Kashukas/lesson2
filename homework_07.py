@@ -35,17 +35,35 @@ def user_info():
     print_key()
     name = input('Enter user name: ')
     print(name + ' info:')
-    print(user_data.get(name, 'User not found'))
+    print(user_data.get(name, 'The user is not found'))
 
 def user_change():
-    print('User change')
+    print('Saved users: ')
+    print_key()
+    name_ch = input('Enter the name of user you want to change: ')
+    try:
+        print('Parameters: ')
+        for key in user_data[name_ch].keys():
+            print(key)
+        change_key = input('Enter the parameter you want to change: ')
+        try:
+            change_value = input('Enter the new value: ')
+            user_data[name_ch][change_key] = change_value
+            print('The new value added.')
+        except KeyError:
+            print('The parameter is not found')
+    except KeyError:
+        print('The user is not found')
 
 def user_del():
     print('Saved users: ')
     print_key()
     del_name = input('Enter the name of user you want to delete: ')
-    del(user_data[del_name])
-    print('User ' + del_name + ' deleted.')
+    try:
+        del(user_data[del_name])
+        print('User ' + del_name + ' deleted.')
+    except KeyError:
+        print('The user is not found')
 
 def user_add():
     name = input('Enter your name: ') # Get name from user
