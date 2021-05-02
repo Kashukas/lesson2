@@ -17,6 +17,7 @@ while True:
     import datetime
     import os
     import time
+    import colon_blinking
     
     time_str = str(datetime.datetime.now().time())
     list_time = []
@@ -27,6 +28,8 @@ while True:
     create_print_list()
 
     print_time()
+
+    colon_blinking.colon_blinking()
     
     # print(time_str[0:8])
     
