@@ -1,76 +1,17 @@
-digits_kw = {
-        '1': [
-        ' \u25A0 ',
-        ' \u25A0 ',
-        ' \u25A0 ',
-        ' \u25A0 ',
-        ' \u25A0 '],
-        '2': [
-        ' \u25A0\u25A0\u25A0 ',
-        '   \u25A0 ',
-        ' \u25A0\u25A0\u25A0 ',
-        ' \u25A0   ',
-        ' \u25A0\u25A0\u25A0 '],
-        '3': [
-        ' \u25A0\u25A0\u25A0 ',
-        '   \u25A0 ',
-        ' \u25A0\u25A0\u25A0 ',
-        '   \u25A0 ',
-        ' \u25A0\u25A0\u25A0 '],
-        '4': [
-        ' \u25A0 \u25A0 ',
-        ' \u25A0 \u25A0 ',
-        ' \u25A0\u25A0\u25A0 ',
-        '   \u25A0 ',
-        '   \u25A0 '],
-        '5': [
-        ' \u25A0\u25A0\u25A0 ',
-        ' \u25A0   ',
-        ' \u25A0\u25A0\u25A0 ',
-        '   \u25A0 ',
-        ' \u25A0\u25A0\u25A0 '],
-        '6': [
-        ' \u25A0\u25A0\u25A0 ',
-        ' \u25A0   ',
-        ' \u25A0\u25A0\u25A0 ',
-        ' \u25A0 \u25A0 ',
-        ' \u25A0\u25A0\u25A0 '],
-        '7': [
-        ' \u25A0\u25A0\u25A0 ',
-        '   \u25A0 ',
-        '   \u25A0 ',
-        '   \u25A0 ',
-        '   \u25A0 '],
-        '8': [
-        ' \u25A0\u25A0\u25A0 ',
-        ' \u25A0 \u25A0 ',
-        ' \u25A0\u25A0\u25A0 ',
-        ' \u25A0 \u25A0 ',
-        ' \u25A0\u25A0\u25A0 '],
-        '9': [
-        ' \u25A0\u25A0\u25A0 ',
-        ' \u25A0 \u25A0 ',
-        ' \u25A0\u25A0\u25A0 ',
-        '   \u25A0 ',
-        ' \u25A0\u25A0\u25A0 '],
-        '0': [
-        ' \u25A0\u25A0\u25A0 ',
-        ' \u25A0 \u25A0 ',
-        ' \u25A0 \u25A0 ',
-        ' \u25A0 \u25A0 ',
-        ' \u25A0\u25A0\u25A0 '],
-        ':': [
-        '   ',
-        ' \u25A0 ',
-        '   ',
-        ' \u25A0 ',
-        '   '],
-        ':_': [
-        '   ',
-        '   ',
-        ' \u25A0 ',
-        '   ',
-        '   ']}
+from digits_keyword import digits_kw
+
+def add_time_symb():
+    for n in range(0, 8, 1):
+        list_time.append(digits_kw[time_str[n]])
+
+def create_print_list():
+    for z in range(0, 5, 1):
+        for m in range(0, 8, 1):
+            list_print[z] += list_time[m][z]
+
+def print_time():
+    for k in range(0, 5, 1):
+        print(list_print[k])
 
 while True:
     import datetime
@@ -81,18 +22,14 @@ while True:
     list_time = []
     list_print = ['', '', '', '', '']
     
-    for n in range(0, 8, 1):
-        list_time.append(digits_kw[time_str[n]])
+    add_time_symb()
+    
+    create_print_list()
 
-    for z in range(0, 5, 1):
-        for m in range(0, 8, 1):
-            list_print[z] += list_time[m][z]
+    print_time()
     
-    print(time_str[0:8])
+    # print(time_str[0:8])
     
-    for k in range(0, 5, 1):
-        print(list_print[k])
-   
     print('''
     Press Ctrl+C to stop
     ''')
