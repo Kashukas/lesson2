@@ -1,19 +1,19 @@
-from digits_keyword import digits_kw
+from digits_dict import digits_d  # Import digits dictionary.
 
-def add_time_symb():
+def add_time_symb():  # Create current time digits list.
     for n in range(0, 8, 1):
-        list_time.append(digits_kw[time_str[n]])
+        list_time.append(digits_d[time_str[n]])
 
 def create_print_list():
     for z in range(0, 5, 1):
         for m in range(0, 8, 1):
             list_print[z] += list_time[m][z]
 
-def print_time():
+def print_time():  # Print list_print line by line.
     for k in range(0, 5, 1):
         print(list_print[k])
 
-while True:
+while True:  # Clock cycle.
     import datetime
     import os
     import time
@@ -31,11 +31,9 @@ while True:
 
     colon_blinking.colon_blinking()
     
-    # print(time_str[0:8])
-    
     print('''
     Press Ctrl+C to stop
     ''')
     
-    time.sleep(0.9)
-    os.system('CLS')
+    time.sleep(0.9)  # Delay.
+    os.system('CLS')  # Screen clear.

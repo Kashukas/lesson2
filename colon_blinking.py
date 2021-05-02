@@ -1,4 +1,4 @@
-from digits_keyword import digits_kw
+from digits_dict import digits_d
 
 def colon_blinking():
-    digits_kw[':'], digits_kw[':_'] = digits_kw[':_'], digits_kw[':']
+    digits_d[':'], digits_d[':_'] = digits_d[':_'], digits_d[':']

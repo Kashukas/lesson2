@@ -1,4 +1,4 @@
-digits_kw = {
+digits_d = {
         '1': [
         ' \u25A0 ',
         ' \u25A0 ',
