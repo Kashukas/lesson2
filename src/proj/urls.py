@@ -20,7 +20,6 @@ from airports import views as airports_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('belarus/', airports_views.airports),
-    path('<aircode>', airports_views.code),
+    path('<str:aircode>', airports_views.code),
     path('', airports_views.airports_home)
 ]
