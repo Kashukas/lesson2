@@ -16,6 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from manuals import views as manuals_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('author/<int:author_id>/', manuals_views.author_view, name="author"),
+    path('authors/', manuals_views.author_list, name="authors"),
+    path('serie/<int:serie_id>/', manuals_views.serie_view, name="serie"),
+    path('series/', manuals_views.serie_list, name="series"),
+    path('genre/<int:genre_id>/', manuals_views.genre_view, name="genre"),
+    path('genres/', manuals_views.genre_list, name="genres"),
+    path('publisher/<int:publisher_id>/', manuals_views.publisher_view, name="publisher"),
+    path('publishers/', manuals_views.publisher_list, name="publishers"),
+
 ]

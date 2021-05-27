@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genre list</title>
+</head>
+<body>
+    <h1>Список жанров</h1>
+    <ul>
+        {% for genre in genre_list %}
+            <li><b>{{ forloop.counter }}) Жанр №{{ genre.pk }}: </b><a href="{% url 'genre' genre.pk %}">{{ genre }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
