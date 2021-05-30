@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genre</title>
+    <title>Genre delete</title>
 </head>
 <body>
-    <h1>Жанр</h1>
-    <ul>
-        <li><b>Название жанра: </b> {{ genre.genre_name }}</li>
-        <li><b>Описание жанра: </b> {{ genre.description }}</li>
-    </ul>
+    <h1>Удалить жанр "{{ genre.genre_name }}"</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit">Да</button>
+        <!-- <button type="submit" value="Cancel">Нет</button> -->
+    </form>
+    <br>
     <a href="{% url 'genres' %}">Назад к списку жанров</a>
 </body>
 </html>

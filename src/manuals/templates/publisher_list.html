@@ -10,8 +10,14 @@
     <h1>Список издательств</h1>
     <ul>
         {% for publisher in publisher_list %}
-            <li><b>{{ forloop.counter }}) Издательство №{{ publisher.pk }}: </b><a href="{% url 'publisher' publisher.pk %}">{{ publisher }}</a></li>
+            <li><b>{{ forloop.counter }}) Издательство №{{ publisher.pk }}: </b><a href="{% url 'publisher' publisher.pk %}">{{ publisher }}</a>
+            <a href="{% url 'publisher-update' publisher.pk %}"><b> | Изменить</b></a>
+            <a href="{% url 'publisher-delete' publisher.pk %}"><b> | Удалить</b></a>
+            </li>
         {% endfor %}
     </ul>
+    <a href="{% url 'publisher-create' %}"> <b>Добавить издательство</b></a> <br>
+    <br>
+    <a href='{% url 'main-page' %}'>Назад к списку справочников</a> 
 </body>
 </html>

@@ -10,8 +10,14 @@
     <h1>Список жанров</h1>
     <ul>
         {% for genre in genre_list %}
-            <li><b>{{ forloop.counter }}) Жанр №{{ genre.pk }}: </b><a href="{% url 'genre' genre.pk %}">{{ genre }}</a></li>
+            <li><b>{{ forloop.counter }}) Жанр №{{ genre.pk }}: </b><a href="{% url 'genre' genre.pk %}">{{ genre }}</a>
+            <a href="{% url 'genre-update' genre.pk %}"><b> | Изменить</b></a>
+            <a href="{% url 'genre-delete' genre.pk %}"><b> | Удалить</b></a>
+            </li>
         {% endfor %}
     </ul>
+    <a href="{% url 'genre-create' %}"> <b>Добавить жанр</b></a> <br>
+    <br>
+    <a href='{% url 'main-page' %}'>Назад к списку справочников</a> 
 </body>
 </html>

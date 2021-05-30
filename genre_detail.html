@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publisher</title>
+    <title>Genre</title>
 </head>
 <body>
-    <h1>Издательство</h1>
+    <h1>Жанр</h1>
     <ul>
-        <li><b>Название: </b> {{ publisher.publisher_name }}</li>
+        <li><b>Название жанра: </b> {{ genre.genre_name }}</li>
+        <li><b>Описание жанра: </b> {{ genre.description }}</li>
     </ul>
-    <a href="{% url 'publishers' %}">Назад к списку издательств</a>
 </body>
 </html>

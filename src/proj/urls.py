@@ -20,6 +20,7 @@ from manuals import views as manuals_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', manuals_views.main_page, name="main-page"),
     path('author/<int:author_id>/', manuals_views.author_view, name="author"),
     path('authors/', manuals_views.author_list, name="authors"),
     path('serie/<int:serie_id>/', manuals_views.serie_view, name="serie"),
@@ -28,5 +29,16 @@ urlpatterns = [
     path('genres/', manuals_views.genre_list, name="genres"),
     path('publisher/<int:publisher_id>/', manuals_views.publisher_view, name="publisher"),
     path('publishers/', manuals_views.publisher_list, name="publishers"),
-
+    path('create-author/', manuals_views.author_create, name="author-create"),
+    path('update-author/<int:author_id>', manuals_views.author_update, name="author-update"),
+    path('delete-author/<int:author_id>', manuals_views.author_delete, name="author-delete"),
+    path('create-serie/', manuals_views.serie_create, name="serie-create"),
+    path('update-serie/<int:serie_id>', manuals_views.serie_update, name="serie-update"),
+    path('delete-serie/<int:serie_id>', manuals_views.serie_delete, name="serie-delete"),
+    path('create-genre/', manuals_views.genre_create, name="genre-create"),
+    path('update-genre/<int:genre_id>', manuals_views.genre_update, name="genre-update"),
+    path('delete-genre/<int:genre_id>', manuals_views.genre_delete, name="genre-delete"),
+    path('create-publisher/', manuals_views.publisher_create, name="publisher-create"),
+    path('update-publisher/<int:publisher_id>', manuals_views.publisher_update, name="publisher-update"),
+    path('delete-publisher/<int:publisher_id>', manuals_views.publisher_delete, name="publisher-delete"),
 ]

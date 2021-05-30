@@ -48,14 +48,3 @@ class Publisher(models.Model):
     class Meta:
         verbose_name = "Издатель"
         verbose_name_plural = "Издатели"
-
-
-#class Book(models.Model):
-    #author
-    #serie
-    #genre
-    #publisher
-
-class Meta:
-    verbose_name = "Автор"
-    verbose_name_plural = "Авторы"
