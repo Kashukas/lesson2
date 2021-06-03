@@ -1,0 +1,10 @@
+{% extends "base.html"  %}
+{% block title %}Genre{% endblock title %}
+{% block body %}
+    <h1>Жанр</h1>
+    <ul>
+        <li><b>Название жанра: </b> {{ genre.genre_name }}</li>
+        <li><b>Описание жанра: </b> {{ genre.description }}</li>
+    </ul>
+    <a href="{% url 'genre:genres' %}">Назад к списку жанров</a>
+{% endblock body %}

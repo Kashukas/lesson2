@@ -1,0 +1,15 @@
+{% extends "base.html"  %}
+{% block title %}Main page{% endblock title %}
+{% block body %}
+    <h1>Список справочников</h1>
+    <ul>
+            <li><a href='{% url 'author:authors' %}'>Авторы</a></li>
+            <li><a href='{% url 'serie:series' %}'>Серии книг</a></li>
+            <li><a href='{% url 'genre:genres' %}'>Жанры</a></li>
+            <li><a href='{% url 'publisher:publishers' %}'>Издательства</a></li>
+            {{ units }} <br>
+            {{ list_a }} <br>
+            {{ list_b }} <br>
+
+    </ul>
+{% endblock body %}

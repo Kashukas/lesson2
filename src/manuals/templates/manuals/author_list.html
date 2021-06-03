@@ -1,0 +1,16 @@
+{% extends "base.html"  %}
+{% block title %}Author list{% endblock title %}
+{% block body %}
+    <h1>Список авторов</h1>
+    <ul>
+        {% for author in author_list %}
+            <li><b>{{ forloop.counter }}) Автор №{{ author.pk }}: </b><a href="{% url 'author:author' author.pk %}">{{ author }}</a>
+                <a href="{% url 'author:author-update' author.pk %}"><b> | Изменить</b></a>
+                <a href="{% url 'author:author-delete' author.pk %}"><b> | Удалить</b></a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'author:author-create' %}"> <b>Добавить автора</b></a> <br>
+    <br>
+    <a href='{% url 'main-page' %}'>Назад к списку справочников</a> 
+{% endblock body %}

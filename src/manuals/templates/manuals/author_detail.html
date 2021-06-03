@@ -1,0 +1,13 @@
+{% extends "base.html"  %}
+{% block title %}Author{% endblock title %}
+{% block body %}
+    <h1>Автор</h1>
+    <ul>
+        <li><b>Имя автора:</b> {{ author.name }}</li>
+        <li><b>Краткое описание:</b> {{ author.description }}</li>
+    </ul>
+    <a href="{% url 'author:authors' %}">Назад к списку авторов</a>
+{% endblock body %}
+
+
+

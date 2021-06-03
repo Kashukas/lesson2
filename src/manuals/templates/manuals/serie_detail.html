@@ -1,0 +1,10 @@
+{% extends "base.html"  %}
+{% block title %}Serie{% endblock title %}
+{% block body %}
+    <h1>Серия книг</h1>
+    <ul>
+        <li><b>Название серии: </b> {{ serie.bookserie }}</li>
+        <li><b>Количество книг в серии: </b> {{ serie.books_quantity }}</li>
+    </ul>
+    <a href="{% url 'serie:series' %}">Назад к списку серий книг</a>
+{% endblock body %}

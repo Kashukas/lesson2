@@ -1,0 +1,10 @@
+{% extends "base.html"  %}
+{% block title %}Publisher create{% endblock title %}
+{% block body %}
+    <h1>Внести новое издательство</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+{% endblock body %}

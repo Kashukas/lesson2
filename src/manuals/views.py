@@ -1,60 +1,116 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import TemplateView
 
 from . import models
 from . import forms
+
 # Create your views here.
 
-# Author V(l)
-def author_view(request, author_id):
-    author = models.Author.objects.get(pk=author_id)
-    ctx = {
-        'author': author
-    }
-    return render(request, template_name="author_detail.html", context=ctx)
+# Author CRUD(l)
+class AuthorDetailView(DetailView):
+    model = models.Author
 
-def author_list(request):
-    author_list = models.Author.objects.all()
-    ctx = {
-        'author_list': author_list
-    }
-    return render(request, template_name="author_list.html", context=ctx)
-# End of Author V(l)
+class AuthorListView(ListView):
+    model = models.Author
 
-# Serie V(l)
-def serie_view(request, serie_id):
-    serie = models.Serie.objects.get(pk=serie_id)
-    ctx = {
-        'serie': serie
-    }
-    return render(request, template_name="serie_detail.html", context=ctx)
+    # Можно фильтровать данные:
+    #def get_queryset(self):
+    #    qs = super().get_queryset()
+    #    return qs.filter(name= '')
+    
+    # Если имя шаблона по умолчанию не устраивает, то можно задать самому:
+    #template_name = "manuals/author_list.html"
 
-def serie_list(request):
-    serie_list = models.Serie.objects.all()
-    ctx = {
-        'serie_list': serie_list
-    }
-    return render(request, template_name="serie_list.html", context=ctx)
-# End of Serie V(l)
+class AuthorCreateView(CreateView):
+    model = models.Author
+    # или указать поля формы
+    #fields = (
+    #    'name',
+    #    'description',
+    #)
+    form_class = forms.CreateAuthorForm # или сослаться на форму
+    template_name = "manuals/author_create.html"
 
-# Genre V(l)
-def genre_view(request, genre_id):
-    genre = models.Genre.objects.get(pk=genre_id)
-    ctx = {
-        'genre': genre
-    }
-    return render(request, template_name="genre_detail.html", context=ctx)
+class AuthorUpdateView(UpdateView):
+    model = models.Author
+    form_class = forms.CreateAuthorForm
+    template_name = "manuals/author_create.html"
 
-def genre_list(request):
-    genre_list = models.Genre.objects.all()
-    ctx = {
-        'genre_list': genre_list
-    }
-    return render(request, template_name="genre_list.html", context=ctx)
-# End of Genre V(l)
+class AuthorDeleteView(DeleteView):
+    model = models.Author
+    success_url = reverse_lazy('author:authors')
 
-# Publisher V(l)
+# End of Author CRUD(l)
+
+# Serie CRUD(l)
+class SerieDetailView(DetailView):
+    model = models.Serie
+
+class SerieListView(ListView):
+    model = models.Serie
+
+class SerieCreateView(CreateView):
+    model = models.Serie
+    form_class = forms.CreateSerieForm # Ссылка на форму.
+    template_name = "manuals/serie_create.html"
+
+class SerieUpdateView(UpdateView):
+    model = models.Serie
+    form_class = forms.CreateSerieForm
+    template_name = "manuals/serie_create.html"
+
+class SerieDeleteView(DeleteView):
+    model = models.Serie
+    success_url = reverse_lazy('serie:series')
+# End of Serie CRUD(l)
+
+# Genre CRUD(l)
+class GenreDetailView(DetailView):
+    model = models.Genre
+
+class GenreListView(ListView):
+    model = models.Genre
+
+class GenreCreateView(CreateView):
+    model = models.Genre
+    form_class = forms.CreateGenreForm # Ссылка на форму.
+    template_name = "manuals/genre_create.html"
+
+class GenreUpdateView(UpdateView):
+    model = models.Genre
+    form_class = forms.CreateGenreForm
+    template_name = "manuals/genre_create.html"
+
+class GenreDeleteView(DeleteView):
+    model = models.Genre
+    success_url = reverse_lazy('genre:genres')
+# End of Genre CRUD(l)
+
+# Publisher CRUD(l)
+class PublisherDetailView(DetailView):
+    model = models.Publisher
+
+class PublisherListView(ListView):
+    model = models.Publisher
+
+class PublisherCreateView(CreateView):
+    model = models.Publisher
+    form_class = forms.CreatePublisherForm # Ссылка на форму.
+    template_name = "manuals/publisher_create.html"
+
+class PublisherUpdateView(UpdateView):
+    model = models.Publisher
+    form_class = forms.CreatePublisherForm
+    template_name = "manuals/publisher_create.html"
+
+class PublisherDeleteView(DeleteView):
+    model = models.Publisher
+    success_url = reverse_lazy('publisher:publishers')
+
+
 def publisher_view(request, publisher_id):
     publisher = models.Publisher.objects.get(pk=publisher_id)
     ctx = {
@@ -68,115 +124,25 @@ def publisher_list(request):
         'publisher_list': publisher_list
     }
     return render(request, template_name="publisher_list.html", context=ctx)
-# End of Publisher V(l)
+# End of Publisher CRUD(l)
 
-def main_page(request):
-    return render(request, template_name="main_page.html", context={})
+#def main_page(request): # можно удалить (старая реализация)
+#    return render(request, template_name="main_page.html", context={})
+
+class Home(TemplateView):
+    # units = [1, 2, 3]
+    template_name = "manuals/main_page.html"
+
+    #def get_context_data(self, **kwargs):
+    #    list_a = models.Author.objects.all()
+    #    list_b = models.Serie.objects.all()
+    #    context = super().get_context_data(**kwargs)
+    #    context['units'] = self.units
+    #    context['list_a'] = list_a
+    #    context['list_b'] = list_b
+    #    return context
 
 # Lesson 17
-# Author CUD
-def author_create(request):
-    if request.method == 'POST':
-        form = forms.CreateAuthorForm(request.POST)
-        if form.is_valid():
-            form.save()
-            #print(form.cleaned_data)
-            #author_name = form.cleaned_data.get()
-            #obj = models.Author.objects.create(name=name, description=description)
-            return HttpResponseRedirect(reverse("authors"))
-        else:
-            pass
-        #name = request.POST.get('name')
-        #description = request.POST.get('description')
-    else:
-        form = forms.CreateAuthorForm()
-    #print(name, description)
-    #obj = models.Author.objects.create(name=name, description=description)
-    #author_create = models.Publisher.objects.all()
-    ctx = {
-        'form': form,
-        'is_valid': form.is_valid()
-    }
-    return render(request, template_name="author_create.html", context=ctx)
-
-
-def author_update(request, author_id):
-    if request.method == 'POST':
-        obj = models.Author.objects.get(pk=author_id)
-        form = forms.CreateAuthorForm(request.POST, instance=obj)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse("authors"))
-        else:
-            pass
-    else:
-        obj = models.Author.objects.get(pk=author_id)
-        form = forms.CreateAuthorForm(instance=obj)
-    ctx = {
-        'form': form,
-        'is_valid': form.is_valid()
-    }
-    return render(request, template_name="author_create.html", context=ctx)
-
-def author_delete(request, author_id):
-    if request.method == 'POST':
-        obj = models.Author.objects.get(pk=author_id).delete()
-        return HttpResponseRedirect(reverse("authors"))
-    else:
-        author = models.Author.objects.get(pk=author_id)
-        ctx = {
-        'author': author
-        }
-        return render(request, template_name="author_delete.html", context=ctx)
-# End of Author CUD
-
-# Serie CUD
-def serie_create(request):
-    if request.method == 'POST':
-        form = forms.CreateSerieForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse("series"))
-        else:
-            pass
-    else:
-        form = forms.CreateSerieForm()
-    ctx = {
-        'form': form,
-        'is_valid': form.is_valid()
-    }
-    return render(request, template_name="serie_create.html", context=ctx)
-
-
-def serie_update(request, serie_id):
-    if request.method == 'POST':
-        obj = models.Serie.objects.get(pk=serie_id)
-        form = forms.CreateSerieForm(request.POST, instance=obj)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse("series"))
-        else:
-            pass
-    else:
-        obj = models.Serie.objects.get(pk=serie_id)
-        form = forms.CreateSerieForm(instance=obj)
-    ctx = {
-        'form': form,
-        'is_valid': form.is_valid()
-    }
-    return render(request, template_name="serie_create.html", context=ctx)
-
-def serie_delete(request, serie_id):
-    if request.method == 'POST':
-        obj = models.Serie.objects.get(pk=serie_id).delete()
-        return HttpResponseRedirect(reverse("series"))
-    else:
-        serie = models.Serie.objects.get(pk=serie_id)
-        ctx = {
-        'serie': serie
-        }
-        return render(request, template_name="serie_delete.html", context=ctx)
-# End of Serie CUD
 
 # Genre CUD
 def genre_create(request):
