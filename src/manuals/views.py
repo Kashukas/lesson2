@@ -124,4 +124,24 @@ class Home(TemplateView):
     #    context['list_b'] = list_b
     #    return context
 
-    
+# Start of Status CRUD(l)
+class StatusDetailView(DetailView):
+    model = models.Status
+
+class StatusListView(ListView):
+    model = models.Status
+
+class StatusCreateView(CreateView):
+    model = models.Status
+    form_class = forms.CreateStatusForm # Ссылка на форму.
+    template_name = "manuals/status_create.html"
+
+class StatusUpdateView(UpdateView):
+    model = models.Status
+    form_class = forms.CreateStatusForm
+    template_name = "manuals/status_create.html"
+
+class StatusDeleteView(DeleteView):
+    model = models.Status
+    success_url = reverse_lazy('status:Statuses')
+# End of Status CRUD(l)

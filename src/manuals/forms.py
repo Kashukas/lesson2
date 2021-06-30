@@ -53,3 +53,10 @@ class CreatePublisherForm(forms.ModelForm):
         fields = (
             'publisher_name',
         )    
+
+class CreateStatusForm(forms.ModelForm):
+    class Meta:
+        model = models.Status
+        fields = (
+            'order_status',
+        )    
