@@ -28,4 +28,10 @@ urlpatterns = [
     path('create-publisher/', manuals_views.PublisherCreateView.as_view(), name="publisher-create"),
     path('update-publisher/<int:pk>', manuals_views.PublisherUpdateView.as_view(), name="publisher-update"),
     path('delete-publisher/<int:pk>', manuals_views.PublisherDeleteView.as_view(), name="publisher-delete"),
+
+    path('status/<int:pk>/', manuals_views.StatusDetailView.as_view(), name="publisher"),
+    path('publishers/', manuals_views.StatusListView.as_view(), name="statuses"),
+    path('create-status/', manuals_views.StatusCreateView.as_view(), name="status-create"),
+    path('update-status/<int:pk>', manuals_views.StatusUpdateView.as_view(), name="status-update"),
+    path('delete-status/<int:pk>', manuals_views.StatusDeleteView.as_view(), name="status-delete"),
 ]

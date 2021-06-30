@@ -63,4 +63,15 @@ class Publisher(models.Model):
         verbose_name = "Издатель"
         verbose_name_plural = "Издатели"
 
+class Status(models.Model):
+    order_status = models.CharField(verbose_name="Статус заказа", max_length=100)
 
+    def __str__(self) -> str:
+        return self.order_status
+    
+    def get_absolute_url(self):
+        return reverse('status:statuses')
+
+    class Meta:
+        verbose_name = "Статус заказа"
+        verbose_name_plural = "Статусы заказов"

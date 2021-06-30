@@ -15,14 +15,28 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 from manuals import views as manuals_views
+from books import views as books_views
+from users import views as users_views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin1/', admin.site.urls),
     path('author/', include('manuals.urls', namespace='author')),
     path('serie/', include('manuals.urls', namespace="serie")),
     path('genre/', include('manuals.urls', namespace="genre")),
+    path('cart/', include('carts.urls', namespace="cart")),
     path('publisher/', include('manuals.urls', namespace="publisher")),
-    path('', manuals_views.Home.as_view(), name="main-page"),
+    path('book/', include('books.urls', namespace="book")),
+    path('admin/', manuals_views.Home.as_view(), name="test-page"),
+    path('user/', include('users.urls', namespace="user")),
+    path('', books_views.BookListLastView.as_view(), name="main-page"),
 ]
+
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

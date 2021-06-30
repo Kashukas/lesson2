@@ -1,12 +1,23 @@
 {% extends "base.html"  %}
 {% block title %}Main page{% endblock title %}
 {% block body %}
-    <h1>Список справочников</h1>
     <ul>
+            <h1>Заказы</h1>
+            <li><a href='#'>Корзины</a></li>
+            <br>
+            <h1>Книги</h1>
+            <li><a href='{% url 'book:books' %}'>Список книг</a></li>
+            <br>
+            <h1>Список справочников</h1>
             <li><a href='{% url 'author:authors' %}'>Авторы</a></li>
             <li><a href='{% url 'serie:series' %}'>Серии книг</a></li>
             <li><a href='{% url 'genre:genres' %}'>Жанры</a></li>
             <li><a href='{% url 'publisher:publishers' %}'>Издательства</a></li>
+            <br>
+            <h1>Пользователи и группы</h1>
+            <li><a href='#'>Пользователи</a></li>
+            <li><a href='#'>Группы</a></li>
+
             {{ units }} <br>
             {{ list_a }} <br>
             {{ list_b }} <br>

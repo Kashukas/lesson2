@@ -1,0 +1,36 @@
+{% extends "base.html"  %}
+{% block title %}Book list{% endblock title %}
+{% block body %}
+    <h1>Список книг</h1>
+    <a href="?filter=all" class="btn btn-success">Все</a><br>
+    <a href="?filter=av" class="btn btn-warning">Доступные к заказу</a><br>
+    <a href="?filter=not_av" class="btn btn-danger">Недоступные к заказу</a><br>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Название книги</th>
+              <th scope="col">Заведена</th>
+              <th scope="col">Изменить</th>
+              <th scope="col">Удалить</th>
+              <th scope="col">Корзина</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for book in book_list %}
+            <tr>
+              <th scope="row">{{ book.pk }}</th>
+              <td><a href="{% url 'book:book' book.pk %}">{{ book.name }}</a></td>
+              <td><a href="#">{{ book.created }}</a></td>
+              <td><a href="{% url 'book:book-update' book.pk %}"><b>Изменить</b></a></td>
+              <td><a href="{% url 'book:book-delete' book.pk %}"><b>Удалить</b></a></td>
+              <td><a href="{% url 'cart:cart-edit' %}?book_id={{ book.pk }}"><b>Добавить в корзину</b></a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+    </table>
+    
+    <a href="{% url 'book:book-create' %}"> <b>Добавить книгу</b></a> <br>
+    <br>
+    <a href='{% url 'main-page' %}'>Назад на домашнюю страницу</a> 
+{% endblock body %}

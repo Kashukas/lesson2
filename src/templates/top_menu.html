@@ -1,0 +1,16 @@
+{% load my_tags %}
+
+<ul class="navbar-nav me-auto mb-2 mb-md-0">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'book:books' %}">Каталог книг</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'cart:cart-edit' %}?book_id={{ book.pk }}" tabindex="-1" aria-disabled="true">Корзина</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Курс USD к BYN:{% currency_rate %}</a>
+    </li>
+</ul>
