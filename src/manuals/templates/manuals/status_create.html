@@ -1,0 +1,10 @@
+{% extends "base.html"  %}
+{% block title %}Status create{% endblock title %}
+{% block body %}
+    <h1>Внести новый статус заказа</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+{% endblock body %}

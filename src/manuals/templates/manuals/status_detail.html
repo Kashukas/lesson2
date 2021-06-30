@@ -1,0 +1,9 @@
+{% extends "base.html"  %}
+{% block title %}Status{% endblock title %}
+{% block body %}
+    <h1>Статус заказа</h1>
+    <ul>
+        <li><b>Название статуса заказа: </b> {{ status.order_status }}</li>
+    </ul>
+    <a href="{% url 'status:statuses' %}">Назад к списку статусов заказов</a>
+{% endblock body %}

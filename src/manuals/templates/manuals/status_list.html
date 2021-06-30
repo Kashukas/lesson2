@@ -1,0 +1,16 @@
+{% extends "base.html"  %}
+{% block title %}Status list{% endblock title %}
+{% block body %}
+    <h1>Список статусов заказов</h1>
+    <ul>
+        {% for status in status_list %}
+            <li><b>{{ forloop.counter }}) Статус заказа №{{ status.pk }}: </b><a href="{% url 'status:status' status.pk %}">{{ status }}</a>
+            <a href="{% url 'status:status-update' status.pk %}"><b> | Изменить</b></a>
+            <a href="{% url 'status:status-delete' status.pk %}"><b> | Удалить</b></a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'status:status-create' %}"> <b>Добавить новый статус заказа</b></a> <br>
+    <br>
+    <a href='{% url 'main-page' %}'>Назад к списку справочников</a> 
+{% endblock body %}
