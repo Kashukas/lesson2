@@ -30,6 +30,7 @@ urlpatterns = [
     path('genre/', include('manuals.urls', namespace="genre")),
     path('cart/', include('carts.urls', namespace="cart")),
     path('publisher/', include('manuals.urls', namespace="publisher")),
+    path('status/', include('manuals.urls', namespace="status")),
     path('book/', include('books.urls', namespace="book")),
     path('admin/', manuals_views.Home.as_view(), name="test-page"),
     path('user/', include('users.urls', namespace="user")),
