@@ -18,7 +18,7 @@
             </tr>
           </thead>
           <tbody>
-            {% for book in book_list %}
+            {% for book in page_obj %}
             <tr>
               <th scope="row">{{ book.pk }}</th>
               <td><a href="{% url 'book:book' book.pk %}">{{ book.name }}</a></td>
@@ -32,6 +32,46 @@
           </tbody>
     </table>
     
+    <div class="pagination">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <a href="?page=1">&laquo; Первая</a>
+              <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+          {% endif %}
+  
+          <span class="current">
+              Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+          </span>
+  
+          {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
+              <a href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
+          {% endif %}
+      </span>
+    </div>
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+        {% endif %}
+        {% for page_num in paginator.page_range %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+
     <a href="{% url 'book:book-create' %}"> <b>Добавить книгу</b></a> <br>
     <br>
     <a href='{% url 'main-page' %}'>Назад на домашнюю страницу</a> 

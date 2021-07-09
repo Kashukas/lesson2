@@ -25,7 +25,7 @@
                 </div>
             </td>
             <td>{{ good_in_cart.total_price }}</td>
-            <td><a href="{% url 'cart:delete-good-in-cart' good_in_cart.pk %}" class="btn btn-sm btn-danger">Удалить</a></td>
+            <td><form action="{% url 'cart:delete-good-in-cart' good_in_cart.pk %}" method="post"> {% csrf_token %} <button type="submit" class="btn btn-sm btn-danger">Удалить</button></form></td>
         </tr>
         {% endfor %}
         <tr>
@@ -34,9 +34,15 @@
         </tr>
     </tbody>
 </table>
-{% csrf_token %}
 <button type="submit" class="btn btn-warning" name='submit' value="save_cart">Сохранить корзину</button>
 <button type="submit" class="btn btn-success" name='submit' value="create_order">Сохранить корзину и оформить заказ</button>
 </form>
-
+<br>
+<br>
+<h1>Вы собираетесь создать свой заказ:</h1>
+<form action="{% url 'order:create-order' %}" method="post">
+    {{ form|crispy }}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Создать заказ</button>
+</form>
 {% endblock body %}

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-
+{% load crispy_forms_tags %}
 {% block body %}
-{{ form }}
+{{ form|crispy }}
+<input type="submit" value="login" class="btn btn-success">
 {% endblock %}

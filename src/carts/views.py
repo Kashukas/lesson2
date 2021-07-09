@@ -1,7 +1,7 @@
 from abc import ABC
 import django
 from django.db.models.fields import DecimalField
-from django.views.generic import UpdateView, DetailView, FormView
+from django.views.generic import UpdateView, DetailView, FormView, RedirectView
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.views.generic.edit import DeleteView
@@ -43,9 +43,12 @@ class CartView(DetailView):
                 book_in_cart.save()
         return cart
 
-class DeleteGoodInCartView(DeleteView):
+class DeleteGoodInCartView(RedirectView):
     model = models.BookInCart
     success_url = reverse_lazy('cart:cart-edit')
+    def get_redirect_url(self, *args, **kwargs):
+        self.model.objects.get(pk=self.kwargs.get('pk')).delete()
+        return self.success_url
 
 
 class CartUpdate(View):
@@ -69,7 +72,7 @@ class CartUpdate(View):
         if action == 'save_cart':
             return HttpResponseRedirect(reverse_lazy('cart:cart-edit'))
         elif action == 'create_order':
-            return HttpResponseRedirect(reverse_lazy('cart:create-order'))
+            return HttpResponseRedirect(reverse_lazy('order:create-order'))
         else:
             return HttpResponseRedirect(reverse_lazy('cart:cart-edit'))
 

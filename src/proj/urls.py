@@ -34,6 +34,7 @@ urlpatterns = [
     path('book/', include('books.urls', namespace="book")),
     path('admin/', manuals_views.Home.as_view(), name="test-page"),
     path('user/', include('users.urls', namespace="user")),
+    path('order/', include('orders.urls', namespace="order")),
     path('', books_views.BookListLastView.as_view(), name="main-page"),
 ]
 

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="alert alert-danger" role="alert">
+    Вы вышли из своей учетной записи.
+</div>
+
+{{ form|crispy }}
+{% endblock %}

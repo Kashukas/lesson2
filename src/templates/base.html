@@ -55,6 +55,14 @@
     </header>
     <main class="flex-shrink-0">
         <div class="container">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-success" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+
           {% block body %}Default body{% endblock body %}
         </div>
     </main>

@@ -1,4 +1,5 @@
 {% extends "base.html"  %}
+{% load crispy_forms_tags %}
 {% block title %}Main page{% endblock title %}
 {% block body %}
     <ul>
@@ -15,7 +16,7 @@
             <li><a href='{% url 'publisher:publishers' %}'>Издательства</a></li>
             <br>
             <h1>Пользователи и группы</h1>
-            <li><a href='#'>Пользователи</a></li>
+            <li><a href="{% url 'user:users' %}">Пользователи</a></li>
             <li><a href='#'>Группы</a></li>
 
             {{ units }} <br>
@@ -23,4 +24,5 @@
             {{ list_b }} <br>
 
     </ul>
+{{ form|crispy }}
 {% endblock body %}

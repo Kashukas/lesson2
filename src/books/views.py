@@ -16,11 +16,12 @@ class BookDetailView(DetailView):
 
 class BookListView(ListView):
     model = models.Book
+    paginate_by = 2
     # Filter books list:
     def get_queryset(self):
         qs = super().get_queryset()
         filter = self.request.GET.get('filter')
-        search_data = self.request.GET.get('search_data')
+        search_data = self.request.GET.get('search_data') # Данные введенные в окне 'Поиск'
         if filter == 'av':
             return qs.filter(active=True)
         if filter == 'not_av':

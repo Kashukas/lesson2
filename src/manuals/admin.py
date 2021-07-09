@@ -12,7 +12,11 @@ class SerieAdmin(admin.ModelAdmin):
 class GenreAdmin(admin.ModelAdmin):
     list_display = ['genre_name', 'description']
 
+class StatusAdmin(admin.ModelAdmin):
+    list_display = ['pk','order_status']
+
 admin.site.register(models.Author, AuthorAdmin)
 admin.site.register(models.Serie, SerieAdmin)
 admin.site.register(models.Publisher)
 admin.site.register(models.Genre, GenreAdmin)
+admin.site.register(models.Status, StatusAdmin)

@@ -1,0 +1,16 @@
+{% extends "base.html"  %}
+{% block title %}Users list{% endblock title %}
+{% block body %}
+    <h1>Список пользователей</h1>
+    <ul>
+        {% for user in user_list %}
+            <li><b>{{ forloop.counter }}) Пользователь №{{ user.pk }}: </b><a href="{% url 'user:user' user.pk %}">{{ user }}</a>
+                <a href="{% url 'user:update' user.pk %}"><b> | Изменить</b></a>
+                <a href="{% url 'user:delete-user' user.pk %}"><b> | Удалить</b></a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'user:register' %}"> <b>Добавить пользователя</b></a> <br>
+    <br>
+    <a href='{% url 'main-page' %}'>На главную страницу</a> 
+{% endblock body %}

@@ -19,7 +19,7 @@
             <li><b>Цена:</b> {{ book.price }}</li>
           </ul>
         </p>
-        <a href="{% url 'cart:cart-edit' %}" class="btn btn-primary"><b>Добавить в корзину</b></a>
+        <a href="{% url 'cart:cart-edit' %}?book_id={{ book.pk }}" class="btn btn-primary"><b>Добавить в корзину</b></a>
       </div>
     </div>
 
