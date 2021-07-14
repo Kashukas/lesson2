@@ -20,7 +20,6 @@ from django.conf import settings
 
 from manuals import views as manuals_views
 from books import views as books_views
-from users import views as users_views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -28,13 +27,14 @@ urlpatterns = [
     path('author/', include('manuals.urls', namespace='author')),
     path('serie/', include('manuals.urls', namespace="serie")),
     path('genre/', include('manuals.urls', namespace="genre")),
-    path('cart/', include('carts.urls', namespace="cart")),
-    path('publisher/', include('manuals.urls', namespace="publisher")),
     path('status/', include('manuals.urls', namespace="status")),
+    path('publisher/', include('manuals.urls', namespace="publisher")),
+    path('cart/', include('carts.urls', namespace="cart")),
     path('book/', include('books.urls', namespace="book")),
-    path('admin/', manuals_views.Home.as_view(), name="test-page"),
+    path('admin/', manuals_views.Home.as_view(), name="admin"),
     path('user/', include('users.urls', namespace="user")),
     path('order/', include('orders.urls', namespace="order")),
+    path('comment/', include('comments.urls', namespace="comment")),
     path('', books_views.BookListLastView.as_view(), name="main-page"),
 ]
 

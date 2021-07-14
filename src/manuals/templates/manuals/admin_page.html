@@ -1,10 +1,10 @@
 {% extends "base.html"  %}
 {% load crispy_forms_tags %}
-{% block title %}Main page{% endblock title %}
+{% block title %}Manager page{% endblock title %}
 {% block body %}
     <ul>
             <h1>Заказы</h1>
-            <li><a href='#'>Корзины</a></li>
+            <li><a href='{% url 'order:orders' %}'>Заказы</a></li>
             <br>
             <h1>Книги</h1>
             <li><a href='{% url 'book:books' %}'>Список книг</a></li>
@@ -14,6 +14,7 @@
             <li><a href='{% url 'serie:series' %}'>Серии книг</a></li>
             <li><a href='{% url 'genre:genres' %}'>Жанры</a></li>
             <li><a href='{% url 'publisher:publishers' %}'>Издательства</a></li>
+            <li><a href='{% url 'status:statuses' %}'>Статусы заказов</a></li>
             <br>
             <h1>Пользователи и группы</h1>
             <li><a href="{% url 'user:users' %}">Пользователи</a></li>

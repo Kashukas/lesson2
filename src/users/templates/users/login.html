@@ -2,26 +2,27 @@
 {% load crispy_forms_tags %}
 {% block body %}
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p>Ваше имя пользователя и пароль не совпадают. Пожалуйста, попробуйте еще раз.</p>
 {% endif %}
 
 {% if next %}
     {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
+    <p>У вашей учетной записи нет доступа к этой странице. Для продолжения,
+    пожалуйста, войдите в систему с учетной записью, у которой есть доступ к этой странице.</p>
     {% else %}
-    <p>Пожалуйста, авторизуйтесь или <a href="{% url 'user:register' %}?next={{ next }}">зарегистрируйтесь</a>, чтобы увидеть эту страницу.</p>
+    <p>Пожалуйста, авторизуйтесь, чтобы увидеть эту страницу.</p>
     {% endif %}
 {% endif %}
 
+<p> Пожалуйста, авторизуйтесь или <a href="{% url 'user:register' %}?next={{ next }}">зарегистрируйтесь</a>.</p>
 <form method="post" action="{% url 'user:login' %}">
 {% csrf_token %}
 {{ form|crispy }}
 
 <input type="submit" value="login" class="btn btn-success">
-<input type="hidden" name="next" value="{{ next }}">
+<!--<input type="hidden" name="next" value="{{ next }}">-->
 </form>
-
+{{ next }}
 {# Assumes you setup the password_reset view in your URLconf #}
 <!--<p><a href="#">Lost password?</a></p>-->
 

@@ -1,0 +1,16 @@
+{% extends "base.html"  %}
+{% block title %}Groups list{% endblock title %}
+{% block body %}
+    <h1>Список групп пользователей</h1>
+    <ul>
+        {% for group in group_list %}
+            <li><b>{{ forloop.counter }}) Группа №{{ group.pk }}: </b><a href="{% url 'user:group' group.pk %}">{{ group }}</a>
+                <a href="{% url 'user:group-update' group.pk %}"><b> | Изменить</b></a>
+                <a href="{% url 'user:group-delete' group.pk %}"><b> | Удалить</b></a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'users:group-create' %}"> <b>Добавить группу</b></a> <br>
+    <br>
+    <a href='{% url 'main-page' %}'>На главную страницу</a>
+{% endblock body %}

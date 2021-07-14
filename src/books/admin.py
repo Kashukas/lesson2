@@ -4,7 +4,8 @@ from django.contrib import admin
 from . import models
 
 class BookAdmin(admin.ModelAdmin):
-   list_display = ['name',
+   list_display = ['pk',
+    'name',
     'pic',
     'price',
     'serie',

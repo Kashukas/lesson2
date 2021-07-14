@@ -1,12 +1,12 @@
 {% extends "base.html"  %}
 {% block title %}Status delete{% endblock title %}
 {% block body %}
-    <h1>Удалить серию книг "{{ status.order_status }}"</h1>
+    <h1>Удалить статус "{{ status.order_status }}"</h1>
     <form action="" method="post">
         {% csrf_token %}
         <button type="submit">Да</button>
         <!-- <button type="submit" value="Cancel">Нет</button> -->
     </form>
     <br>
-    <a href="{% url 'status:statuses' %}">Назад к списку серий книг</a>
+    <a href="{% url 'status:statuses' %}">Назад к списку статусов заказов</a>
 {% endblock body %}

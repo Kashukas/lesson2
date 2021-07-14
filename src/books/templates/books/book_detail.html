@@ -1,4 +1,5 @@
 {% extends "base.html"  %}
+{% load template_tags %}
 {% block title %}Book{% endblock title %}
 {% block body %}
     <div class="card" style="width: 18rem;">
@@ -22,6 +23,8 @@
         <a href="{% url 'cart:cart-edit' %}?book_id={{ book.pk }}" class="btn btn-primary"><b>Добавить в корзину</b></a>
       </div>
     </div>
+
+    {% show_comments %}
 
     <a href="{% url 'book:books' %}">Назад к списку книг</a>
 {% endblock body %}

@@ -1,0 +1,27 @@
+{% extends "base.html"  %}
+{% block title %}Order detail{% endblock title %}
+{% block body %}
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Заказ №{{ order.pk }}</h5>
+        <p class="card-text">
+          <ul>
+            <li><b>Создан:</b> {{ order.created }}</li>
+            <li><b>Статус:</b> {{ order.status__order_status }}</li>
+
+            <!--<li><b>Автор(ы):</b>
+              <ul>
+                {% for author in book.author.all %}
+                  <li> {{ author }} </li>
+                {% endfor %}
+              </ul>
+            </li>-->
+          </ul>
+        </p>
+      </div>
+    </div>
+    <h1> {{ order.pk }} </h1>
+    <h2> {{ order.created }} </h2>
+    <h3> {{ order.status__order_status }} </h3>
+    <a href="{% url 'order:orders' %}">Назад к списку заказов</a>
+{% endblock body %}

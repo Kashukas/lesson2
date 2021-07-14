@@ -5,6 +5,10 @@ from django.contrib.auth.password_validation import validate_password
 from django.core import validators
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.contrib import messages
+from . import models as user_models
+from django.contrib.auth.models import Group, Permission
+from django.contrib.admin.widgets import FilteredSelectMultiple
 
 
 User = get_user_model()
@@ -22,12 +26,21 @@ def phone_validator(value): # Валидация телефонного номе
                 params={'value': value},
                 )
 
-#def is_username_unique(username):
-    # сделать проверку на уникальность пользователя
-    # добавить is_user_unique в валидаторы username
+def is_username_unique(username):
+    #if not user.is_authenticated 
+    try:
+        user = User.objects.get(username=username)
+        if user:
+            raise ValidationError(
+            f"Пользователь с именем {str(username)} уже существует! Введите другое имя пользователя.",
+            params={'username': username},
+            )
+    except User.DoesNotExist:
+        pass
+        
 
 class RegisterForm(forms.Form):
-    username = forms.CharField(max_length=150, required=True, label="Имя пользователя", validators=[username_validator])
+    username = forms.CharField(max_length=150, required=True, label="Имя пользователя", validators=[username_validator, is_username_unique])
     password1 = forms.CharField(
         label="Пароль",
         strip=False,
@@ -69,3 +82,19 @@ class RegisterForm(forms.Form):
         except ValidationError as error:
             self.add_error('password2', error)
         return password2
+
+# class GroupCreateForm(forms.Form):
+#     class Meta:
+#         model = Group
+#         fields = (
+#         'name',
+#         'permissions',
+#         )
+
+class GroupCreateForm(forms.ModelForm):
+    class Meta:
+        model = Group
+        fields = '__all__'
+        widgets = {
+            'permissions': FilteredSelectMultiple("Permission", False, attrs={'rows':'2'}),
+        }

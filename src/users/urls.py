@@ -13,6 +13,14 @@ urlpatterns = [
     path('user/<int:pk>/', users_views.UserDetailView.as_view(), name="user"),
     path('users/', users_views.UserListView.as_view(), name="users"),
     path('delete-user/<int:pk>', users_views.UserDeleteView.as_view(), name="delete-user"),
+
+    path('group/<int:pk>/', users_views.GroupDetailView.as_view(), name="group"),
+    path('groups/', users_views.GroupListView.as_view(), name="groups"),
+    path('group-create/', users_views.GroupCreateView.as_view(), name="group-create"),
+    path('group-update/<int:pk>', users_views.GroupUpdateView.as_view(), name="group-update"),
+    path('group-delete/<int:pk>', users_views.GroupDeleteView.as_view(), name="group-delete"),
+
+
 ]
 
 #path('chp/', users_views.PasswordChangeView.as_view(template_name="users/pch.html"), name='chp'),

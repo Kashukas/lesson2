@@ -2,20 +2,20 @@
 
 <ul class="navbar-nav me-auto mb-2 mb-md-0">
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="#">Home</a>
+      <a class="nav-link active" aria-current="page" href="{% url 'book:books' %}">Каталог книг</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'book:books' %}">Каталог книг</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'cart:cart-edit' %}?book_id={{ book.pk }}" tabindex="-1" aria-disabled="true">Корзина</a>
+      <a class="nav-link" href="{% url 'cart:cart-edit' %}" tabindex="-1" aria-disabled="true">Корзина</a>
     </li>
     <li class="nav-item">
       <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Курс USD к BYN: {% currency_rate %}</a>
     </li>
     {% if user.is_anonymous %}
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'user:login' %}" tabindex="-1" aria-disabled="true">Login</a>
+      <a class="nav-link" href="{% url 'user:login' %}" tabindex="-1" aria-disabled="true">Войти</a>
+    </li>
+    <li class="nav-item"></li>
+      <a class="nav-link" href="{% url 'user:register' %}?next={{ next }}" tabindex="-1" aria-disabled="true">Зарегистрироваться</a>
     </li>
     {% else %}
     <li class="nav-item"></li>  
@@ -23,6 +23,9 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{% url 'user:logout' %}" tabindex="-1" aria-disabled="true">Выйти</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'admin' %}" tabindex="-1" aria-disabled="true">Адм. портал</a>
     </li>
     {% endif %}
     

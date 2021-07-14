@@ -5,6 +5,8 @@ from django.urls import reverse
 
 from manuals.models import Author, Serie, Genre, Publisher
 from django.utils.translation import gettext_lazy as _
+from comments.models import Comment
+from django.contrib.contenttypes.fields import GenericRelation
 # Create your models here.
 
 class Book(models.Model):
@@ -73,6 +75,7 @@ class Book(models.Model):
         auto_now=True, 
         auto_now_add=False)
     description = models.TextField(verbose_name= "Краткое описание", default="Описание отсутствует")
+    comment = GenericRelation(Comment)
 
 
     def __str__(self) -> str:

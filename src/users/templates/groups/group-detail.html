@@ -1,0 +1,16 @@
+{% extends "base.html"  %}
+{% block title %}Group detail{% endblock title %}
+{% block body %}
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Группа "{{ group.name }}"</h5>
+        <p class="card-text">
+          <ul>
+            <li><b>Права:</b> {{ group.permissions }}</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+
+    <a href="{% url 'user:groups' %}">Назад к списку групп</a>
+{% endblock body %}

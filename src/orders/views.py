@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from . import models, forms
-from django.views.generic import FormView, DetailView
+from django.views.generic import FormView, DetailView, ListView
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, request
 from django.views import View
@@ -13,9 +13,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class CreateOrderView(LoginRequiredMixin, FormView):
     #messages.add_message(self.request, messages.INFO, 'Спасибо! Для продолжения оформения вашего заказа зарегистрируйтесь или авторизуйтесь.')
     form_class = forms.OrderCreateForm
-    template_name = 'orders/create-order.html'
+    template_name = 'orders/order-create.html'
     login_url = 'user:login'
-    #redirect_field_name = 'user:register'
+    redirect_field_name = 'redirect_to'
 
     def get_initial(self):
         if self.request.user.is_anonymous:
@@ -55,3 +55,24 @@ class CreateOrderView(LoginRequiredMixin, FormView):
         )
         context['object'] = cart
         return context
+
+class OrderListView(ListView):
+    model = models.Order
+    paginate_by = 10
+    template_name = 'orders/order-list.html'
+    # Filter books list:
+    # def get_queryset(self):
+    #     qs = super().get_queryset()
+    #     #filter = self.request.GET.get('filter')
+    #     search_data = self.request.GET.get('search_data') # Данные введенные в окне 'Поиск'
+    #     # if filter == 'av':
+    #     #     return qs.filter(active=True)
+    #     # if filter == 'not_av':
+    #     #     return qs.filter(active=False)
+    #     if search_data:
+    #         return qs.filter(Q(username__icontains=search_data) | Q(author__name__icontains=search_data)) # Условие или - |
+    #     return qs
+
+class OrderDetailView(ListView):
+    model = models.Order
+    template_name = 'orders/order-detail.html'

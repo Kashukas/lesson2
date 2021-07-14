@@ -1,0 +1,15 @@
+{% extends "base.html"  %}
+{% load crispy_forms_tags %}
+{% block title %}Group create/update{% endblock title %}
+{% block body %}
+    <h1>Создать/изменить группу</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br>
+        <button type="submit" class="btn btn-success">Сохранить</button>
+    </form>
+    <br>
+    <a href="{% url 'user:groups' %}">Назад к списку групп</a>
+    <br>
+{% endblock body %}

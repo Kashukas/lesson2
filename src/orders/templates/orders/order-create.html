@@ -1,5 +1,6 @@
 {% extends "base.html"  %}
 {% load crispy_forms_tags %}
+{% load template_tags %}
 {% block title %}Cart list{% endblock title %}
 {% block body %}
 <h1>Корзина</h1>
@@ -46,4 +47,5 @@
     {% csrf_token %}
     <button type="submit" class="btn btn-success">Создать заказ</button>
 </form>
+{% show_comments %}
 {% endblock body %}

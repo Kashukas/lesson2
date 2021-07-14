@@ -1,0 +1,15 @@
+{% extends "base.html"  %}
+{% block title %}Order list{% endblock title %}
+{% block body %}
+    <h1>Список заказов</h1>
+    <ul>
+        {% for order in order_list %}
+        <li><b>{{ forloop.counter }}) Заказ №{{ order.pk }}: </b><a href="{% url 'order:order' order.pk %}">{{ order.created }}</a>
+
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'order:create-order' %}"> <b>Добавить заказ</b></a> <br>
+    <br>
+    <a href='{% url 'admin' %}'>Назад к списку справочников</a>
+{% endblock body %}
