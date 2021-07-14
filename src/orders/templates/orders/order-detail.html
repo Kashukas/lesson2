@@ -1,4 +1,5 @@
 {% extends "base.html"  %}
+{% load template_tags %}
 {% block title %}Order detail{% endblock title %}
 {% block body %}
     <div class="card" style="width: 18rem;">
@@ -7,7 +8,12 @@
         <p class="card-text">
           <ul>
             <li><b>Создан:</b> {{ order.created }}</li>
-            <li><b>Статус:</b> {{ order.status__order_status }}</li>
+            <li><b>Статус:</b> {{ order.status.order_status }}</li>
+            <li><b>Заказчик:</b> {{ order.cart }}</li>
+            <li><b>Контактная информация:</b> {{ order.contact_info }}</li>
+            <li><b>Телефон:</b> {{ order.phone }}</li>
+            {% show_comments %}
+
 
             <!--<li><b>Автор(ы):</b>
               <ul>
@@ -20,8 +26,5 @@
         </p>
       </div>
     </div>
-    <h1> {{ order.pk }} </h1>
-    <h2> {{ order.created }} </h2>
-    <h3> {{ order.status__order_status }} </h3>
     <a href="{% url 'order:orders' %}">Назад к списку заказов</a>
 {% endblock body %}

@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from . import models, forms
-from django.views.generic import FormView, DetailView, ListView
+from django.views.generic import FormView, DetailView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, request
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from . import forms
 
 
 # Create your views here.
@@ -73,6 +74,16 @@ class OrderListView(ListView):
     #         return qs.filter(Q(username__icontains=search_data) | Q(author__name__icontains=search_data)) # Условие или - |
     #     return qs
 
-class OrderDetailView(ListView):
+class OrderDetailView(DetailView):
     model = models.Order
     template_name = 'orders/order-detail.html'
+
+class OrderUpdateView(UpdateView):
+    model = models.Order
+    form_class = forms.OrderCreateForm
+    template_name = "orders/order-create.html"
+
+class OrderDeleteView(DeleteView):
+    model = models.Order
+    template_name = "orders/order_confirm_delete.html"
+    success_url = reverse_lazy('order:orders')

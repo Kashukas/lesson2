@@ -18,7 +18,7 @@
             <br>
             <h1>Пользователи и группы</h1>
             <li><a href="{% url 'user:users' %}">Пользователи</a></li>
-            <li><a href='#'>Группы</a></li>
+            <li><a href='{% url 'user:groups' %}'>Группы</a></li>
 
             {{ units }} <br>
             {{ list_a }} <br>

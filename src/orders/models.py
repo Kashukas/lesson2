@@ -3,8 +3,6 @@ from django.db import models
 from carts.models import Cart
 from comments.models import Comment
 from manuals.models import Status
-from django.contrib.contenttypes.fields import GenericRelation
-from comments.models import Comment
 
 # Create your models here.
 
@@ -22,6 +20,7 @@ class Order(models.Model):
         default=1
     )
     contact_info = models.TextField(verbose_name="Контактная информация")
+    phone = models.CharField(verbose_name="Телефон", max_length=15)
     created = models.DateTimeField(
         verbose_name="Дата внесения в каталог",
         auto_now=False, 

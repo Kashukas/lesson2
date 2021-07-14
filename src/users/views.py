@@ -158,7 +158,7 @@ class GroupCreateView(CreateView):
     model = Group
     form_class = users_forms.GroupCreateForm
     template_name = "groups/group-create.html"
-    success_url = reverse_lazy('main-page')
+    success_url = reverse_lazy('user:groups')
 
 class GroupListView(ListView):
     model = Group
@@ -176,7 +176,7 @@ class GroupUpdateView(UpdateView):
 class GroupDeleteView(DeleteView):
     model = Group
     template_name = "groups/group_confirm_delete.html"
-    success_url = 'groups/group-list.html'
+    success_url = reverse_lazy('user:groups')
     #success_url = reverse_lazy('user:groups')
 
 
