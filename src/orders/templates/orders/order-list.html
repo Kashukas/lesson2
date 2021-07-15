@@ -2,14 +2,24 @@
 {% block title %}Order list{% endblock title %}
 {% block body %}
     <h1>Список заказов</h1>
-    <a href="?filter=all" class="btn btn-success">Все</a><br>
-    <a href="?filter=av" class="btn btn-warning">Доступные к заказу</a><br>
-    <a href="?filter=not_av" class="btn btn-danger">Недоступные к заказу</a><br>
+    <form class="d-flex" action="{% url 'order:orders' %}">
+        <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" name="q">
+        <button class="btn btn-outline-success" type="submit">Поиск</button>
+    </form>
+    <br>
+    <a href="?filter=all" class="btn btn-primary">Все</a>
+    <a href="?filter=new" class="btn btn-danger">Новые</a>
+    <a href="?filter=paid" class="btn btn-warning">Оплаченные</a>
+    <a href="?filter=in_pr" class="btn btn-secondary">В обработке</a>
+    <a href="?filter=prd" class="btn btn-dark">Обработанные</a>
+    <a href="?filter=dlvrd" class="btn btn-success">Доставленные</a>
+    <br>
     <table class="table table-hover">
         <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Номер заказа</th>
+              <th scope="col">Заказчик</th>
               <th scope="col">Статус заказа</th>
               <th scope="col">Создан</th>
               <th scope="col">Изменить</th>
@@ -21,6 +31,7 @@
             <tr>
               <th scope="row">{{ forloop.counter }}</th>
               <td><a href="{% url 'order:order' order.pk %}">{{ order.pk }}</a></td>
+              <td><a href="{% url 'user:user' user.pk %}">{{ order.cart.customer }}</a></td>
               <td><a href="#">{{ order.status }}</a></td>
               <td><a href="#">{{ order.created }}</a></td>
               <td><a href="{% url 'order:order-update' order.pk %}"><b>Изменить</b></a></td>
@@ -52,7 +63,7 @@
         </ul>
     </nav>
 
-    <a href="{% url 'order:create-order' %}"> <b>Добавить заказ</b></a> <br>
+    <a href="{% url 'order:create-order' %}" class="btn btn-light" role="button"> <b>Добавить заказ</b></a> <br>
     <br>
-    <a href='{% url 'admin' %}'>Назад к списку справочников</a>
+    <a href='{% url 'admin' %}' class="btn btn-info" role="button">Назад на административный портал</a>
 {% endblock body %}

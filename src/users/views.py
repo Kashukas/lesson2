@@ -146,6 +146,7 @@ class UserDetailView(DetailView):
     template_name = 'users/user-detail.html'
 
 class UserListView(ListView):
+    paginate_by = 10
     model = models.User
     template_name = 'users/user-list.html'
 

@@ -13,7 +13,7 @@ class Cart(models.Model):
         null=True,
         blank=True,
         related_name="carts",
-        verbose_name="Корзина",
+        verbose_name="Заказчик",
         on_delete=models.PROTECT
     )
     created = models.DateTimeField(

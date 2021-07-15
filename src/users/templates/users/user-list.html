@@ -10,7 +10,69 @@
             </li>
         {% endfor %}
     </ul>
-    <a href="{% url 'user:register' %}"> <b>Добавить пользователя</b></a> <br>
+
+    <h1>Список пользователей</h1>
+    <form class="d-flex" action="{% url 'user:users' %}">
+        <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" name="q">
+        <button class="btn btn-outline-success" type="submit">Поиск</button>
+    </form>
     <br>
-    <a href='{% url 'main-page' %}'>На главную страницу</a> 
+    <a href="?filter=all" class="btn btn-primary">Все</a>
+    <a href="?filter=new" class="btn btn-danger">Новые</a>
+    <a href="?filter=paid" class="btn btn-warning">Оплаченные</a>
+    <a href="?filter=in_pr" class="btn btn-secondary">В обработке</a>
+    <a href="?filter=prd" class="btn btn-dark">Обработанные</a>
+    <a href="?filter=dlvrd" class="btn btn-success">Доставленные</a>
+    <br>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Пользователь</th>
+              <th scope="col">Создан</th>
+              <th scope="col">Группа</th>
+              <th scope="col">Изменить</th>
+              <th scope="col">Удалить</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in user_list %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td><a href="{% url 'user:user' user.pk %}">{{ user }}</a></td>
+              <td>{{ user.created }}</td>
+              <td>{{ user.groups.first }}</td>
+              <td><a href="{% url 'user:update' user.pk %}">Изменить</a></td>
+              <td><a href="{% url 'user:delete-user' user.pk %}">Удалить</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+          {% endif %}
+          {% for page_num in paginator.page_range %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a></li>
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+    </nav>
+
+
+    <a href="{% url 'user:register' %}" class="btn btn-success" role="button"> <b>Добавить пользователя</b></a> <br>
+    <br>
+    <a href='{% url 'admin' %}' class="btn btn-info" role="button">Назад на административный портал</a>
 {% endblock body %}

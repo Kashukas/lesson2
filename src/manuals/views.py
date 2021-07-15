@@ -1,8 +1,11 @@
+from django.contrib.auth import login
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.views.generic import TemplateView
+from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
+
 
 from . import models
 from . import forms
@@ -111,9 +114,14 @@ class PublisherDeleteView(DeleteView):
     success_url = reverse_lazy('publisher:publishers')
 # End of Publisher CRUD(l)
 
-class Home(TemplateView):
+class Home(PermissionRequiredMixin, TemplateView):
     #units = [1, 2, 3]
     template_name = "manuals/admin_page.html"
+    permission_required = 'books.add_book'
+    login_url = 'user:login'
+    # def test_func(self):
+    #     print(self.request.user.groups)
+    #     return self.request.user.groups.__contains__('Managers')
 
     #def get_context_data(self, **kwargs):
     #    list_a = models.Author.objects.all()

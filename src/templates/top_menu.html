@@ -24,9 +24,11 @@
     <li class="nav-item">
       <a class="nav-link" href="{% url 'user:logout' %}" tabindex="-1" aria-disabled="true">Выйти</a>
     </li>
+    {% if perms.books.add_book %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'admin' %}" tabindex="-1" aria-disabled="true">Адм. портал</a>
     </li>
+    {% endif %}
     {% endif %}
     
 

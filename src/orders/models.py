@@ -11,7 +11,8 @@ class Order(models.Model):
     cart = models.ForeignKey(
         Cart,
         on_delete=models.PROTECT,
-        verbose_name='Заказ'
+        verbose_name='Заказ',
+        related_name='orders'
     )
     status = models.ForeignKey(
         Status,

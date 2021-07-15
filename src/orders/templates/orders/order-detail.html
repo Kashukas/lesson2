@@ -9,7 +9,7 @@
           <ul>
             <li><b>Создан:</b> {{ order.created }}</li>
             <li><b>Статус:</b> {{ order.status.order_status }}</li>
-            <li><b>Заказчик:</b> {{ order.cart }}</li>
+            <li><b>Заказчик:</b> {{ order.cart.customer }}</li>
             <li><b>Контактная информация:</b> {{ order.contact_info }}</li>
             <li><b>Телефон:</b> {{ order.phone }}</li>
             {% show_comments %}
@@ -26,5 +26,6 @@
         </p>
       </div>
     </div>
+    <a href="{% url 'order:order-update' order.pk %}">Обновить заказ</a>
     <a href="{% url 'order:orders' %}">Назад к списку заказов</a>
 {% endblock body %}

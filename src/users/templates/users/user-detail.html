@@ -1,0 +1,39 @@
+{% extends "base.html"  %}
+{% block title %}User detail{% endblock title %}
+{% block body %}
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Пользователь "{{ user.username }}"</h5>
+        <p class="card-text">
+          <ul>
+            <li><b>Логин: </b> {{ user.username }}</li>
+            <li><b>E-mail: </b> {{ user.email }}</li>
+            <li><b>Имя:</b> {{ user.first_name }}</li>
+            <li><b>Фамилия:</b> {{ user.last_name }}</li>
+            <li><b>Телефон:</b> {{ user.profile.phone }}</li>
+            <li><b>Группа:</b> {{ user.groups.first }}</li>
+            <br>
+            <b>Домашний адресс:</b>
+            <li><b>Страна:</b> {{ user.profile.country }}</li>
+            <li><b>Город:</b> {{ user.profile.city }}</li>
+            <li><b>Индекс:</b> {{ user.profile.postcode }}</li>
+            <li><b>Адрес 1:</b> {{ user.profile.address1 }}</li>
+            <li><b>Адрес 2:</b> {{ user.profile.address2 }}</li>
+            <br>
+            <li><b>Дополнительная информация:</b> {{ user.profile.addit_info }}</li>
+            <br>
+            <li><b>Заказ(ы):</b>
+              <ul>
+                {% for object in user.carts.all %}
+                <li> {{ object.orders.all }} </li>
+                {% endfor %}
+              </ul>
+            </li>
+
+          </ul>
+        </p>
+      </div>
+    </div>
+
+    <a href="{% url 'user:users' %}">Назад к списку пользователей</a>
+{% endblock body %}

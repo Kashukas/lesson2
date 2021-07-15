@@ -7,6 +7,7 @@ from django.views import View
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from . import forms
+from django.db.models import Q
 
 
 # Create your views here.
@@ -63,18 +64,24 @@ class OrderListView(ListView):
     model = models.Order
     paginate_by = 10
     template_name = 'orders/order-list.html'
-    # Filter books list:
-    # def get_queryset(self):
-    #     qs = super().get_queryset()
-    #     #filter = self.request.GET.get('filter')
-    #     search_data = self.request.GET.get('search_data') # Данные введенные в окне 'Поиск'
-    #     # if filter == 'av':
-    #     #     return qs.filter(active=True)
-    #     # if filter == 'not_av':
-    #     #     return qs.filter(active=False)
-    #     if search_data:
-    #         return qs.filter(Q(username__icontains=search_data) | Q(author__name__icontains=search_data)) # Условие или - |
-    #     return qs
+    # Filter orders list:
+    def get_queryset(self):
+        qs = super().get_queryset()
+        filter = self.request.GET.get('filter')
+        search_data = self.request.GET.get('q') # Данные введенные в окне 'Поиск'
+        if filter == 'new':
+            return qs.filter(status=1)
+        if filter == 'paid':
+            return qs.filter(status=2)
+        if filter == 'in_pr':
+            return qs.filter(status=3)
+        if filter == 'prd':
+            return qs.filter(status=4)
+        if filter == 'dlvrd':
+            return qs.filter(status=5)
+        if search_data:
+            return qs.filter(Q(cart__customer__username__icontains=search_data) | Q(status__order_status__icontains=search_data)) # Условие или - |
+        return qs
 
 class OrderDetailView(DetailView):
     model = models.Order
@@ -82,7 +89,7 @@ class OrderDetailView(DetailView):
 
 class OrderUpdateView(UpdateView):
     model = models.Order
-    form_class = forms.OrderCreateForm
+    form_class = forms.OrderUpdateForm
     template_name = "orders/order-create.html"
 
 class OrderDeleteView(DeleteView):
