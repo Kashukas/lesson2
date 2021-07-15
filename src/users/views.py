@@ -8,7 +8,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.contrib.auth import forms, get_user_model, login, update_session_auth_hash
-from django.views.generic import FormView, DetailView, ListView, DeleteView, CreateView, UpdateView
+from django.views.generic import FormView, DetailView, ListView, DeleteView, CreateView, UpdateView, TemplateView
 from . import forms as users_forms
 from . import models
 from django.db import IntegrityError
@@ -178,7 +178,8 @@ class GroupDeleteView(DeleteView):
     model = Group
     template_name = "groups/group_confirm_delete.html"
     success_url = reverse_lazy('user:groups')
-    #success_url = reverse_lazy('user:groups')
 
 
+class UserProfileView(TemplateView):
+    template_name = "users/user-profile.html"
 

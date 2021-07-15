@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, request
 from django.views import View
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from . import forms
 from django.db.models import Q
 
@@ -60,8 +60,9 @@ class CreateOrderView(LoginRequiredMixin, FormView):
         context['object'] = cart
         return context
 
-class OrderListView(ListView):
+class OrderListView(PermissionRequiredMixin, ListView):
     model = models.Order
+    permission_required = 'books.add_book'
     paginate_by = 10
     template_name = 'orders/order-list.html'
     # Filter orders list:
@@ -79,6 +80,11 @@ class OrderListView(ListView):
             return qs.filter(status=4)
         if filter == 'dlvrd':
             return qs.filter(status=5)
+        try:
+            if filter[0:4] == 'user':
+                return qs.filter(Q(cart__customer__username__icontains=filter[5:]))
+        except TypeError:
+            pass        
         if search_data:
             return qs.filter(Q(cart__customer__username__icontains=search_data) | Q(status__order_status__icontains=search_data)) # Условие или - |
         return qs

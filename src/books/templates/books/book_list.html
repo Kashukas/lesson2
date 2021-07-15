@@ -12,8 +12,12 @@
               <th scope="col">Название книги</th>
               <th scope="col">Заведена</th>
               <th scope="col">Рейтинг</th>
+              {% if perms.books.change_book %}
               <th scope="col">Изменить</th>
+              {% endif %}
+              {% if perms.books.delete_book %}
               <th scope="col">Удалить</th>
+              {% endif %}
               <th scope="col">Корзина</th>
             </tr>
           </thead>
@@ -22,10 +26,14 @@
             <tr>
               <th scope="row">{{ book.pk }}</th>
               <td><a href="{% url 'book:book' book.pk %}">{{ book.name }}</a></td>
-              <td><a href="#">{{ book.created }}</a></td>
+              <td>{{ book.created }}</td>
               <td><a href="#">{{ book.rating }}</a></td>
+              {% if perms.books.change_book %}
               <td><a href="{% url 'book:book-update' book.pk %}"><b>Изменить</b></a></td>
+              {% endif %}
+              {% if perms.books.delete_book %}
               <td><a href="{% url 'book:book-delete' book.pk %}"><b>Удалить</b></a></td>
+              {% endif %}
               <td><a href="{% url 'cart:cart-edit' %}?book_id={{ book.pk }}"><b>Добавить в корзину</b></a></td>
             </tr>
             {% endfor %}

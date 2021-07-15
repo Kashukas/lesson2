@@ -19,7 +19,6 @@ class CartView(DetailView):
     def get_object(self, queryset=None):
         # get cart
         cart_id = self.request.session.get('cart_id')
-        #customer = self.request.session
         customer = self.request.user
         cart, created = models.Cart.objects.get_or_create(
             pk = cart_id,

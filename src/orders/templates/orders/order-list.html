@@ -2,6 +2,7 @@
 {% block title %}Order list{% endblock title %}
 {% block body %}
     <h1>Список заказов</h1>
+    {% if perms.books.add_book %}
     <form class="d-flex" action="{% url 'order:orders' %}">
         <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" name="q">
         <button class="btn btn-outline-success" type="submit">Поиск</button>
@@ -13,6 +14,7 @@
     <a href="?filter=in_pr" class="btn btn-secondary">В обработке</a>
     <a href="?filter=prd" class="btn btn-dark">Обработанные</a>
     <a href="?filter=dlvrd" class="btn btn-success">Доставленные</a>
+    {% endif %}
     <br>
     <table class="table table-hover">
         <thead>
@@ -62,8 +64,11 @@
           {% endif %}
         </ul>
     </nav>
-
+    {% if perms.books.add_book %}
     <a href="{% url 'order:create-order' %}" class="btn btn-light" role="button"> <b>Добавить заказ</b></a> <br>
     <br>
     <a href='{% url 'admin' %}' class="btn btn-info" role="button">Назад на административный портал</a>
+    {% else %}
+    <a href='{% url 'user:profile-user' user.pk %}' class="btn btn-info" role="button">Назад в профиль</a>
+    {% endif %}
 {% endblock body %}

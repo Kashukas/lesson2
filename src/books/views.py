@@ -27,7 +27,7 @@ class BookListView(ListView):
         if filter == 'not_av':
             return qs.filter(active=False)
         if search_data:
-            return qs.filter(Q(name__icontains=search_data) | Q(author__name__icontains=search_data)) # Условие или - |
+            return qs.filter(Q(name__icontains=search_data) | Q(author__name__icontains=search_data) | Q(genre__genre_name__icontains=search_data)) # Условие или - |
         return qs
 
 class BookCreateView(CreateView):
