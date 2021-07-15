@@ -36,9 +36,11 @@ class CreateOrderView(LoginRequiredMixin, FormView):
         if created:
             return HttpResponseRedirect(reverse_lazy('cart:cart-edit'))
         ci = form.cleaned_data.get('contact_info')
+        phone = form.cleaned_data.get('phone')
         order = models.Order.objects.create(
             cart=cart,
-            contact_info = ci
+            contact_info = ci,
+            phone=phone
         )
         del self.request.session['cart_id']
         messages.add_message(
