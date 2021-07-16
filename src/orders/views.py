@@ -60,9 +60,9 @@ class CreateOrderView(LoginRequiredMixin, FormView):
         context['object'] = cart
         return context
 
-class OrderListView(PermissionRequiredMixin, ListView):
+class OrderListView(ListView):
     model = models.Order
-    permission_required = 'books.add_book'
+    #permission_required = 'books.add_book'
     paginate_by = 10
     template_name = 'orders/order-list.html'
     # Filter orders list:

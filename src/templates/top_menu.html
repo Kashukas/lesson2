@@ -17,7 +17,8 @@
     <li class="nav-item"></li>
       <a class="nav-link" href="{% url 'user:register' %}?next={{ next }}" tabindex="-1" aria-disabled="true">Зарегистрироваться</a>
     </li>
-    {% else %}
+    {% endif %}
+    {% if user.is_authenticated %}  
     <li class="nav-item"></li>  
       <a class="nav-link" href="{% url 'user:profile-user' user.pk %}" tabindex="-1" aria-disabled="true">{{ user.username }}</a>
     </li>
@@ -30,7 +31,4 @@
     </li>
     {% endif %}
     {% endif %}
-    
-
-
 </ul>
