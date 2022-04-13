@@ -7,9 +7,9 @@
     <li class="nav-item">
       <a class="nav-link" href="{% url 'cart:cart-edit' %}" tabindex="-1" aria-disabled="true">Корзина</a>
     </li>
-    <li class="nav-item">
+    <!--<li class="nav-item">
       <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Курс USD к BYN: {% currency_rate %}</a>
-    </li>
+    </li> -->
     {% if user.is_anonymous %}
     <li class="nav-item">
       <a class="nav-link" href="{% url 'user:login' %}" tabindex="-1" aria-disabled="true">Войти</a>
